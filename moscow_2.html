@@ -1,0 +1,32 @@
+﻿<html>
+<head>
+	<title>Example 2</title>
+	<meta charset="utf-8">
+	
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	
+	<script src="moscow_ice_fields.js"></script>	
+	
+</head>
+<body>
+	<div id="map" style="height: 100%;"> </div>
+	<script>
+		var map = L.map('map').setView([55.75, 37.63], 10);
+		L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png',
+			{maxZoom: 18, 
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + 
+			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="http://mapbox.com">Mapbox</a>', id: 'examples.map-i875mjb7'
+			}).addTo(map);	
+		L.marker([55.75, 37.617]).addTo(map)		
+				.bindPopup('Тут хорошо')
+				.openPopup();
+				
+		for(var i=0; i<iceFields.length; i++) {		
+			L.marker([iceFields[i].Lat, iceFields[i].Lon]).addTo(map)						
+						.bindPopup(iceFields[i].Cells.ObjectShortName);			
+			};			
+		
+</script>
+</body></html>
