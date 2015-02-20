@@ -8,12 +8,8 @@
 	
 	<script src="moscow_ice_fields.js"></script>
 	
-	<script src="http://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-	<link rel="stylesheet" href="http://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.css" />
-	<link rel="stylesheet" href="http://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.Default.css" />
-	
-	<link rel="stylesheet" href="http://humangeo.github.com/leaflet-dvf/dist/css/dvf.css" type="text/css" />
-	<script type="text/javascript" src="http://humangeo.github.com/leaflet-dvf/dist/leaflet-dvf.min.js">  
+	<script src="http://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
+
 	
 </head>
 <body>
@@ -29,15 +25,12 @@
 		L.marker([55.75, 37.617]).addTo(map)		
 				.bindPopup('Тут хорошо')
 				.openPopup();
+		var heat = L.heatLayer([[iceFields[0].Lat, iceFields[0].Lon]],{radius: 100});
+		for(var i=1; i<iceFields.length; i++) {
+		    heat.addLatLng([iceFields[i].Lat, iceFields[i].Lon]);
+		}
+		heat.addTo(map);
 				
-		var markers = L.markerClusterGroup();
-		for(var i=0; i<iceFields.length; i++) {		
-			var marker = L.marker([iceFields[i].Lat, iceFields[i].Lon])
-						.bindPopup(iceFields[i].Cells.ObjectShortName);
-			markers.addLayer(marker);			
-			};
-		map.addLayer(markers);
-		
-		
+				
 </script>
 </body></html>
